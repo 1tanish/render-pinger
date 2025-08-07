@@ -1,8 +1,12 @@
 export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
+  res.setHeader("Access-Control-Allow-Methods", "GET");
+
   try {
     const response = await fetch("https://portfoli0-9n2k.onrender.com/get-todos");
-    return res.status(200).send("Pinged Render with status: " + response.status);
+    const todos = await response.json();
+    return res.status(200).json(todos);
   } catch (err) {
-    return res.status(500).send("Ping failed");
+    return res.status(500).json({ error: "Failed to fetch todos" });
   }
 }
