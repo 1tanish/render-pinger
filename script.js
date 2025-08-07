@@ -5,7 +5,6 @@ const loadingText = document.querySelector(".loading");
   try {
     const res = await fetch("https://render-pinger-xi.vercel.app/api/ping");
     const todos = await res.json();
-    console.log("Fetched todos:", todos);
     loadingText.style.display = "none";
 
     if (!todos.length) {
