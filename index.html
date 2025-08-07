@@ -9,7 +9,7 @@
     hello world
   </body>
   <script>
-    fetch("https://render-pinger-xi.vercel.app/api/ping")
+    fetch("/api/ping")
       .then((res) => res.json())
       .then((data) => {
         console.log("Todos:", data);
