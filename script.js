@@ -3,7 +3,7 @@ const loadingText = document.querySelector(".loading");
 
 (async () => {
   try {
-    const res = await fetch("https://render-pinger-xi.vercel.app/api/ping");
+    const res = await fetch("/api/ping");
     const todos = await res.json();
     loadingText.style.display = "none";
 
