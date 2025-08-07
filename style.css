@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: #eee;
+  padding: 2rem;
+}
+
+h1 {
+  color: #00ff88;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #444;
+}
+
+.done {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.loading {
+  font-style: italic;
+  color: #888;
+}
