@@ -1,18 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    hello world
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #00ff88;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #444;
+    }
+
+    .done {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .loading {
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>📝 Todo List</h1>
+  <p class="loading">Fetching todos...</p>
+  <ul id="todo-list"></ul>
+
   <script>
+    const list = document.getElementById("todo-list");
+    const loadingText = document.querySelector(".loading");
+
     fetch("/api/ping")
       .then((res) => res.json())
-      .then((data) => {
-        console.log("Todos:", data);
+      .then((todos) => {
+        loadingText.style.display = "none";
+        if (!todos.length) {
+          list.innerHTML = "<li>No todos found.</li>";
+          return;
+        }
+
+        todos.forEach((todo) => {
+          const item = document.createElement("li");
+          item.textContent = todo.task;
+          if (todo.done) item.classList.add("done");
+          list.appendChild(item);
+        });
+      })
+      .catch((err) => {
+        loadingText.textContent = "Failed to load todos.";
+        console.error(err);
       });
   </script>
+</body>
 </html>
