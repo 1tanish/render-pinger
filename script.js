@@ -3,9 +3,9 @@ const loadingText = document.querySelector(".loading");
 
 (async () => {
   try {
-    const res = await fetch("/api/ping");
+    const res = await fetch("https://render-pinger-xi.vercel.app/api/ping");
     const todos = await res.json();
-
+    console.log("Fetched todos:", todos);
     loadingText.style.display = "none";
 
     if (!todos.length) {
@@ -13,9 +13,9 @@ const loadingText = document.querySelector(".loading");
       return;
     }
 
-    todos.forEach((todo) => {
+    todos.sort((a, b) => a.done - b.done).forEach((todo) => {
       const item = document.createElement("li");
-      item.textContent = todo.task;
+      item.textContent = todo.text;
       if (todo.done) item.classList.add("done");
       list.appendChild(item);
     });
